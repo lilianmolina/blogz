@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<h1>Blog Posts</h1>
+
+    <div>
+        <h2>{{each_post.title}}</h2>
+        <p class="entry">{{each_post.post}}</p>
+        <p class="byline">Written by <a href="./blog?owner_id={{each_post.owner_id}}">{{each_post.owner.username}}</a></p>
+    </div>
+    
+
+{% endblock %}

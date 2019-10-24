@@ -1,23 +1,33 @@
 
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block content %}
+{% block content %}    
+    
+    <h1>Add a Blog Entry</h1>
+    <!--  form action needs to match the url you want it to go to after submit -->
+    <form action="/newblogpost" method='POST'>
 
-    <h2>New Blog Entry</h2>
-    <form method='POST' action="/newblogpost">
-        <label for='title'>
-            New Blog Title:<br>
-            <input name="title" type="text" value='{{blog_title}}' />
-            <span class="error">{{title_error}}</span>
+        <p class="flash">
+        
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            <ul>
+            {% for category,message in messages %}
+                <li class="{{category}}">{{message}}</li>
+            {% endfor %}
+            </ul>
+        {% endwith %}
+
+        </p>
+
+        <label>
+            <span class="form_label">Title:</span>
+            <input name="blog_title" type="text" value="{{post_title}}">
         </label>
-        <br>
-        <label for='body'>
-            Blog Entry Here:<br>
-            <textarea name="body" type="text" />{{blog_body}}</textarea>
-            <span class="error">{{body_error}}</span>
+            <br>
+            <span class="form_label">Your new blog:</span>
+            <textarea name="blog_post" type="textarea" rows="5">{{post_entry}}</textarea>
         </label>
-        <br>
-        <input type="submit" value='Post New Blog' />
+        <input class="submit" type="submit" value="Post Entry" />
     </form>
 
-{% endblock %}
+{% endblock %} 
